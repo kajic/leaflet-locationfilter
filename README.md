@@ -7,7 +7,7 @@ through a set of callbacks that are called when the user interacts with
 the filter. 
 
 leaflet-locationfilter is developed by <a href="http://tripbirds.com">Tripbirds.com</a>.
-You may <a href="http://tripbirds.com/hotels/new-york/">see it in action here</a>.
+You may <a href="http://tripbirds.com/hotels/new-york/?bounds=40.721,-73.992,40.75,-73.969">see it in action here</a>.
 
 ### Usage
 Create a new LocationFilter and add it to the map:
