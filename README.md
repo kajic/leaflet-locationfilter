@@ -45,6 +45,9 @@ var isEnabled = locationFilter.isEnabled();
 
 **enable** (optional): Set to true to enable the filter as soon as it is added to the map. Defaults to false.
 
+#### Callbacks
+All callbacks are given one argument; the current bounds of the location filter.
+
 **onChange** (optional): Called every time the location filter changes size or position.
 
 **onEnabled**: (optional): Called when the location filter gets enabled.
