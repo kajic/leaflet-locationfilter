@@ -1,10 +1,13 @@
-leaflet-locationfilter by Tripbirds.com
-=======================================
+leaflet-locationfilter
+======================
 
 Provides a location filter for Leaflet. In short, the location filter is 
 a draggable/resizable rectangle. It is integrated with your application
 through a set of callbacks that are called when the user interacts with
 the filter. 
+
+leaflet-locationfilter is developed by <a href="http://tripbirds.com">Tripbirds.com</a>.
+You may <a href="http://tripbirds.com/hotels/new-york/">see it in action here</a>.
 
 ### Usage
 Create a new LocationFilter and add it to the map:
