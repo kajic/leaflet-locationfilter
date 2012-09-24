@@ -1,4 +1,4 @@
-Leaflet.locationfilter by Tripbirds.com
+leaflet-locationfilter by Tripbirds.com
 =======================================
 
 Provides a location filter for Leaflet. In short, the location filter is 
@@ -39,13 +39,20 @@ var isEnabled = locationFilter.isEnabled();
 
 ### Options
 **bounds** (optional): The initial bounds for the location filter. Defaults to the maps own bounds.
+
 **enable** (optional): Set to true to enable the filter as soon as it is added to the map. Defaults to false.
+
 **onChange** (optional): Called every time the location filter changes size or position.
+
 **onEnabled**: (optional): Called when the location filter gets enabled.
+
 **onDisabled** (optional): Called when the location filter gets disabled.
+
 **onEnableClick** (optional): Called when the user clicks the enable button.
+
 **onDisableClick** (optional): Called when the user clicks the disable button.
+
 **onAdjustToZoomClick** (optional): Called when the user clicks the adjust button.
 
 ### License
-Leaflet.locationfilter is free software, and may be redistributed under the MIT-LICENSE.
+leaflet-locationfilter is free software, and may be redistributed under the MIT-LICENSE.
