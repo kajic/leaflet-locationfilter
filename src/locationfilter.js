@@ -137,7 +137,7 @@ L.LocationFilter = L.Class.extend({
             fill: true,
             fillColor: "black",
             fillOpacity: 0.3,
-            clickable: false,
+            clickable: false
         };
         options = $.extend({}, defaultOptions, options);
         var rect = new L.Rectangle(bounds, options);
@@ -208,7 +208,7 @@ L.LocationFilter = L.Class.extend({
             var corners = [that._nwMarker.getLatLng(), 
                            that._neMarker.getLatLng(), 
                            that._swMarker.getLatLng(), 
-                           that._seMarker.getLatLng()]
+                           that._seMarker.getLatLng()];
             corners.sort(function(a, b) {
                 if (a.lat != b.lat)
                     return b.lat-a.lat;
