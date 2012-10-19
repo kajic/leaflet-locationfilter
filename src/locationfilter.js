@@ -116,12 +116,12 @@ L.LocationFilter = L.Class.extend({
         this._initializeButtonContainer();
 
         if (this.options.enable) {
-            this._enable();
+            this.enable();
         }
     },
 
     onRemove: function(map) {
-        this._disable();
+        this.disable();
         this._buttonContainer.removeFrom(map);
     },
 
@@ -357,7 +357,11 @@ L.LocationFilter = L.Class.extend({
     }, 
 
     /* Enable the location filter */
-    _enable: function() {
+    enable: function() {
+        if (this._enabled) {
+            return;
+        }
+
         // Initialize corners
         var bounds;
         if (this._sw && this._ne) {
@@ -413,7 +417,11 @@ L.LocationFilter = L.Class.extend({
     },
 
     /* Disable the location filter */
-    _disable: function() {
+    disable: function() {
+        if (!this._enabled) {
+            return;
+        }
+
         // Update buttons
         this._buttonContainer.removeClass("enabled");
 
@@ -466,11 +474,11 @@ L.LocationFilter = L.Class.extend({
                 onClick: function(event) {
                     if (!that._enabled) {
                         // Enable the location filter
-                        that._enable();
+                        that.enable();
                         that._callCallback("onEnableClick");
                     } else {
                         // Disable the location filter
-                        that._disable();
+                        that.disable();
                         that._callCallback("onDisableClick");
                     }
                 }
