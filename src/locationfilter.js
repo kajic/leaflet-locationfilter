@@ -90,7 +90,17 @@ L.Control.ButtonContainer = L.Control.extend({
     }
 });
 
-L.LocationFilter = L.Class.extend({    
+L.LocationFilter = L.Class.extend({
+    options: {
+        enableButton: {
+            enableText: "Select area",
+            disableText: "Remove selection"
+        },
+        adjustButton: {
+            text: "Select area within current zoom"
+        }
+    },
+
     initialize: function(options) {
         L.Util.setOptions(this, options);
     },
@@ -366,8 +376,14 @@ L.LocationFilter = L.Class.extend({
 
         // Update buttons
         this._buttonContainer.addClass("enabled");
-        this._enableButton.setText("Remove selection");
-        this._createAdjustButton();
+
+        if (this._enableButton) {
+            this._enableButton.setText(this.options.enableButton.disableText);
+        }
+
+        if (this.options.adjustButton) {
+            this._createAdjustButton();
+        }
         
         // Draw filter
         this._initialDraw();
@@ -400,8 +416,14 @@ L.LocationFilter = L.Class.extend({
     _disable: function() {
         // Update buttons
         this._buttonContainer.removeClass("enabled");
-        this._enableButton.setText("Select area");
-        this._adjustButton.remove();
+
+        if (this._enableButton) {
+            this._enableButton.setText(this.options.enableButton.enableText);
+        }
+
+        if (this._adjustButton) {
+            this._adjustButton.remove();
+        }
 
         // Remove event listener
         this._map.off("move", this._moveHandler);
@@ -421,7 +443,7 @@ L.LocationFilter = L.Class.extend({
         var that = this;
         this._adjustButton = new L.Control.Button({
             className: "adjust-button",
-            text: "Select area within current zoom",
+            text: this.options.adjustButton.text,
             
             onClick: function(event) {
                 that._adjustToMap();
@@ -435,22 +457,26 @@ L.LocationFilter = L.Class.extend({
     _initializeButtonContainer: function() {
         var that = this;
         this._buttonContainer = new L.Control.ButtonContainer({className: "location-filter button-container"});
-        this._enableButton = new L.Control.Button({
-            className: "enable-button",
-            text: "Select area",
-            
-            onClick: function(event) {
-                if (!that._enabled) {
-                    // Enable the location filter
-                    that._enable();
-                    that._callCallback("onEnableClick");
-                } else {
-                    // Disable the location filter
-                    that._disable();
-                    that._callCallback("onDisableClick");
+
+        if (this.options.enableButton) {
+            this._enableButton = new L.Control.Button({
+                className: "enable-button",
+                text: this.options.enableButton.enableText,
+
+                onClick: function(event) {
+                    if (!that._enabled) {
+                        // Enable the location filter
+                        that._enable();
+                        that._callCallback("onEnableClick");
+                    } else {
+                        // Disable the location filter
+                        that._disable();
+                        that._callCallback("onDisableClick");
+                    }
                 }
-            }
-        }).addTo(this._buttonContainer);
+            }).addTo(this._buttonContainer);
+        }
+
         this._buttonContainer.addTo(this._map);
     }
 });
