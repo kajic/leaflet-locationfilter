@@ -8,16 +8,6 @@
  * Date: 2012-09-24
  * Version: 0.1
  */
-L.LatLngBounds.prototype.toBoxString = function() {
-    var sw = this.getSouthWest(),
-        ne = this.getNorthEast(),
-        swLat = Quail.Math.round(sw.lat, 3),
-        swLng = Quail.Math.round(sw.lng, 3),
-        neLat = Quail.Math.round(ne.lat, 3),
-        neLng = Quail.Math.round(ne.lng, 3);
-    return [swLat, swLng, neLat, neLng].join();
-};
-
 L.LatLngBounds.prototype.modify = function(map, amount) {
     var sw = this.getSouthWest(),
         ne = this.getNorthEast(),
