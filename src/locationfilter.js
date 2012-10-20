@@ -110,6 +110,11 @@ L.LocationFilter = L.Class.extend({
         }
     },
 
+    onRemove: function(map) {
+        this._disable();
+        this._buttonContainer.removeFrom(map);
+    },
+
     /* Get the current filter bounds */
     getBounds: function() { 
         return new L.LatLngBounds(this._sw, this._ne); 
