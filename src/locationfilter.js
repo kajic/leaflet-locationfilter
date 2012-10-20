@@ -91,6 +91,8 @@ L.Control.ButtonContainer = L.Control.extend({
 });
 
 L.LocationFilter = L.Class.extend({
+    includes: L.Mixin.Events,
+
     options: {
         enableButton: {
             enableText: "Select area",
@@ -136,7 +138,7 @@ L.LocationFilter = L.Class.extend({
         this._sw = bounds.getSouthWest();
         this._se = bounds.getSouthEast();
         this._draw();
-        this._callCallback("onChange");
+        this.fire("change");
     },
 
     isEnabled: function() {
@@ -239,22 +241,13 @@ L.LocationFilter = L.Class.extend({
         this._setupDragendListener(marker);
     },
 
-    /* Call the callback (given by name) if it was supplied in options */
-    _callCallback: function(callbackName) {
-        if (this.options[callbackName]) {
-            this.options[callbackName](this.getBounds());
-        }
-    },
-
-    /* Call the onChange callback whenever dragend is triggered on the
+    /* Emit a change event whenever dragend is triggered on the
        given marker */
     _setupDragendListener: function(marker) {
-        if (this.options.onChange) {
-            var that = this;
-            marker.on('dragend', function(e) {
-                that._callCallback("onChange");
-            });
-        }
+        var that = this;
+        marker.on('dragend', function(e) {
+            that.fire("change");
+        });
     },
 
     /* Create bounds for the mask rectangles and the location
@@ -411,8 +404,8 @@ L.LocationFilter = L.Class.extend({
 
         this._enabled = true;
         
-        // Call the enabled callback
-        this._callCallback("onEnabled");
+        // Fire the enabled event
+        this.fire("enabled");
     },
 
     /* Disable the location filter */
@@ -440,8 +433,8 @@ L.LocationFilter = L.Class.extend({
 
         this._enabled = false;
 
-        // Call the disabled callback
-        this._callCallback("onDisabled");
+        // Fire the disabled event
+        this.fire("disabled");
     },
 
     /* Create a button that allows the user to adjust the location
@@ -454,7 +447,7 @@ L.LocationFilter = L.Class.extend({
             
             onClick: function(event) {
                 that._adjustToMap();
-                that._callCallback("onAdjustToZoomClick");
+                that.fire("adjustToZoomClick");
             }
         }).addTo(this._buttonContainer);
     },
@@ -474,11 +467,11 @@ L.LocationFilter = L.Class.extend({
                     if (!that._enabled) {
                         // Enable the location filter
                         that.enable();
-                        that._callCallback("onEnableClick");
+                        that.fire("enableClick");
                     } else {
                         // Disable the location filter
                         that.disable();
-                        that._callCallback("onDisableClick");
+                        that.fire("disableClick");
                     }
                 }
             }).addTo(this._buttonContainer);
