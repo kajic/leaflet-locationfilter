@@ -120,6 +120,15 @@ L.LocationFilter = L.Class.extend({
         return new L.LatLngBounds(this._sw, this._ne); 
     },
 
+    setBounds: function(bounds) {
+        this._nw = bounds.getNorthWest();
+        this._ne = bounds.getNorthEast();
+        this._sw = bounds.getSouthWest();
+        this._se = bounds.getSouthEast();
+        this._draw();
+        this._callCallback("onChange");
+    },
+
     isEnabled: function() {
         return this._enabled;
     },
@@ -332,19 +341,9 @@ L.LocationFilter = L.Class.extend({
 
     /* Adjust the location filter to the current map bounds */
     _adjustToMap: function() {
-        var mapBounds = this._map.getBounds();
-
-        this._nw = mapBounds.getNorthWest();
-        this._ne = mapBounds.getNorthEast();
-        this._sw = mapBounds.getSouthWest();
-        this._se = mapBounds.getSouthEast();
-        
-        this._draw();
+        this.setBounds(this._map.getBounds());
         this._map.zoomOut();
-
-        // Call change callback
-        this._callCallback("onChange");
-    }, 
+    },
 
     /* Enable the location filter */
     _enable: function() {
