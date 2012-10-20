@@ -134,7 +134,7 @@ L.LocationFilter = L.Class.extend({
             fillOpacity: 0.3,
             clickable: false
         };
-        options = $.extend({}, defaultOptions, options);
+        options = L.Util.extend(defaultOptions, options);
         var rect = new L.Rectangle(bounds, options);
         rect.addTo(this._layer);
         return rect;
@@ -306,9 +306,7 @@ L.LocationFilter = L.Class.extend({
 
     /* Reposition all rectangles and markers to the current filter bounds. */    
     _draw: function(options) {
-        options = $.extend({}, {
-            repositionResizeMarkers: true
-        }, options);
+        options = L.Util.extend({repositionResizeMarkers: true}, options);
 
         // Calculate filter bounds
         this._calculateBounds();
