@@ -138,7 +138,7 @@ L.LocationFilter = L.Class.extend({
         this._sw = bounds.getSouthWest();
         this._se = bounds.getSouthEast();
         this._draw();
-        this.fire("change");
+        this.fire("change", {bounds: bounds});
     },
 
     isEnabled: function() {
@@ -246,7 +246,7 @@ L.LocationFilter = L.Class.extend({
     _setupDragendListener: function(marker) {
         var that = this;
         marker.on('dragend', function(e) {
-            that.fire("change");
+            that.fire("change", {bounds: that.getBounds()});
         });
     },
 
