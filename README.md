@@ -45,20 +45,19 @@ var isEnabled = locationFilter.isEnabled();
 
 **enable** (optional): Set to true to enable the filter as soon as it is added to the map. Defaults to false.
 
-#### Callbacks
-All callbacks are given one argument; the current bounds of the location filter.
+#### Events
 
-**onChange** (optional): Called every time the location filter changes size or position.
+**change**: Fired when the location filter changes size or position.
 
-**onEnabled**: (optional): Called when the location filter gets enabled.
+**enabled**:: Fired when the location filter gets enabled.
 
-**onDisabled** (optional): Called when the location filter gets disabled.
+**disabled**: Fired when the location filter gets disabled.
 
-**onEnableClick** (optional): Called when the user clicks the enable button.
+**enableClick**: Fired when the user clicks the enable button.
 
-**onDisableClick** (optional): Called when the user clicks the disable button.
+**disableClick**: Fired when the user clicks the disable button.
 
-**onAdjustToZoomClick** (optional): Called when the user clicks the adjust button.
+**adjustToZoomClick**: Fired when the user clicks the adjust button.
 
 ### License
 leaflet-locationfilter is free software, and may be redistributed under the MIT-LICENSE.
