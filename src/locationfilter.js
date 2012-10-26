@@ -189,10 +189,10 @@ L.LocationFilter = L.Class.extend({
             var markerPos = that._moveMarker.getLatLng(),
                 latDelta = markerPos.lat-that._nw.lat,
                 lngDelta = markerPos.lng-that._nw.lng;
-            that._nw = new L.LatLng(that._nw.lat+latDelta, that._nw.lng+lngDelta);
-            that._ne = new L.LatLng(that._ne.lat+latDelta, that._ne.lng+lngDelta);
-            that._sw = new L.LatLng(that._sw.lat+latDelta, that._sw.lng+lngDelta);
-            that._se = new L.LatLng(that._se.lat+latDelta, that._se.lng+lngDelta);
+            that._nw = new L.LatLng(that._nw.lat+latDelta, that._nw.lng+lngDelta, true);
+            that._ne = new L.LatLng(that._ne.lat+latDelta, that._ne.lng+lngDelta, true);
+            that._sw = new L.LatLng(that._sw.lat+latDelta, that._sw.lng+lngDelta, true);
+            that._se = new L.LatLng(that._se.lat+latDelta, that._se.lng+lngDelta, true);
             that._draw();
         });
         this._setupDragendListener(this._moveMarker);
@@ -218,8 +218,8 @@ L.LocationFilter = L.Class.extend({
                 latMarker = options.moveAlong.lat,
                 lngMarker = options.moveAlong.lng;
             // Move follower markers when this marker is moved
-            latMarker.setLatLng(new L.LatLng(curPosition.lat, latMarker.getLatLng().lng));
-            lngMarker.setLatLng(new L.LatLng(lngMarker.getLatLng().lat, curPosition.lng));
+            latMarker.setLatLng(new L.LatLng(curPosition.lat, latMarker.getLatLng().lng, true));
+            lngMarker.setLatLng(new L.LatLng(lngMarker.getLatLng().lat, curPosition.lng, true));
             // Sort marker positions in nw, ne, sw, se order
             var corners = [that._nwMarker.getLatLng(), 
                            that._neMarker.getLatLng(), 
@@ -256,9 +256,9 @@ L.LocationFilter = L.Class.extend({
         var mapBounds = this._map.getBounds(),
             outerBounds = new L.LatLngBounds(
                 new L.LatLng(mapBounds.getSouthWest().lat-0.1,
-                             mapBounds.getSouthWest().lng-0.1),
+                             mapBounds.getSouthWest().lng-0.1, true),
                 new L.LatLng(mapBounds.getNorthEast().lat+0.1,
-                             mapBounds.getNorthEast().lng+0.1)
+                             mapBounds.getNorthEast().lng+0.1, true)
             );
 
         // The south west and north east points of the mask */
@@ -266,10 +266,10 @@ L.LocationFilter = L.Class.extend({
         this._one = outerBounds.getNorthEast();
 
         // Bounds for the mask rectangles
-        this._northBounds = new L.LatLngBounds(new L.LatLng(this._ne.lat, this._osw.lng), this._one),
-        this._westBounds = new L.LatLngBounds(new L.LatLng(this._sw.lat, this._osw.lng), this._nw),
-        this._eastBounds = new L.LatLngBounds(this._se, new L.LatLng(this._ne.lat, this._one.lng)),
-        this._southBounds = new L.LatLngBounds(this._osw, new L.LatLng(this._sw.lat, this._one.lng));
+        this._northBounds = new L.LatLngBounds(new L.LatLng(this._ne.lat, this._osw.lng, true), this._one);
+        this._westBounds = new L.LatLngBounds(new L.LatLng(this._sw.lat, this._osw.lng, true), this._nw);
+        this._eastBounds = new L.LatLngBounds(this._se, new L.LatLng(this._ne.lat, this._one.lng, true));
+        this._southBounds = new L.LatLngBounds(this._osw, new L.LatLng(this._sw.lat, this._one.lng, true));
     },
 
     /* Initializes rectangles and markers */
