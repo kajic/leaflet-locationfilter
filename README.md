@@ -13,19 +13,24 @@ You may <a href="http://tripbirds.com/hotels/new-york/?bounds=40.721,-73.992,40.
 Create a new LocationFilter and add it to the map:
 
 ```javascript
-var locationFilter = new L.LocationFilter({
-  onChange: function(bounds) {
-    // do something with the the filter bounds
-  },
+var locationFilter = new L.LocationFilter().addTo(map);
+```
 
-  onEnabled: function(bounds) {
-    // do something with the the filter bounds
-  },
+Bind some events:
 
-  onDisabled: function(bounds) {
-    // do something with the the filter bounds
-  }
-}).addTo(map);
+```javascript
+locationFilter.on("change", function (e) {
+    // Do something when the bounds change.
+    // Bounds are available in `e.bounds`.
+});
+
+locationFilter.on("enabled", function () {
+    // Do something when enabled.
+});
+
+locationFilter.on("disabled", function () {
+    // Do something when disabled.
+});
 ```
 
 Get the current bounds:
