@@ -477,6 +477,8 @@ L.LocationFilter = L.Class.extend({
             }).addTo(this._buttonContainer);
         }
 
-        this._buttonContainer.addTo(this._map);
+        if (this.options.enableButton || this.options.adjustButton) {
+          this._buttonContainer.addTo(this._map);
+        }
     }
 });
