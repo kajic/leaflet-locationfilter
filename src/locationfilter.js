@@ -137,8 +137,10 @@ L.LocationFilter = L.Class.extend({
         this._ne = bounds.getNorthEast();
         this._sw = bounds.getSouthWest();
         this._se = bounds.getSouthEast();
-        this._draw();
-        this.fire("change", {bounds: bounds});
+        if (this.isEnabled()) {
+            this._draw();
+            this.fire("change", {bounds: bounds});
+        }
     },
 
     isEnabled: function() {
