@@ -10,8 +10,7 @@ leaflet-locationfilter is developed by <a href="http://tripbirds.com">Tripbirds.
 You may <a href="http://tripbirds.com/hotels/new-york/?bounds=40.721,-73.992,40.75,-73.969">see it in action here</a>.
 
 Another similar plugin is <a href="https://github.com/heyman/leaflet-areaselect/">Leaflet.AreaSelect</a>, 
-which solves the same problem but with a fixed, centered rectangle that can't be moved, and which 
-support keeping the aspect ratio. 
+which solves the same problem, but with a fixed and centered rectangle, that can't be moved, and that has support for locking the aspect ratio of the selection. 
 
 
 ### Usage
