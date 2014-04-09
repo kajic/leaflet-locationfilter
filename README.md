@@ -54,6 +54,8 @@ var isEnabled = locationFilter.isEnabled();
 
 **enable** (optional): Set to true to enable the filter as soon as it is added to the map. Defaults to false.
 
+**buttonPosition**: Set to position the associated buttons on the map. Defaults to 'topleft'.
+
 #### Events
 
 **change**: Fired when the location filter changes size or position.
